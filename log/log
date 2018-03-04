@@ -1,0 +1,2 @@
+DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): plot.ly
+DEBUG:urllib3.connectionpool:https://plot.ly:443 "POST /clientresp HTTP/1.1" 200 None

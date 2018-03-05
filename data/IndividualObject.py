@@ -1,3 +1,8 @@
+import math
+
+import numpy as np
+
+
 class IndividualObject:
     def __init__(self, object_type, height, width, length, first_frame, tx, ty, tz, rx, ry, rz, count):
 
@@ -58,74 +63,149 @@ class Pose:
 
     def get_corners_of_bounding_box(self, height, width, length):
 
-        # front_lower_left_corner = {'x': float(self.tx),
-        #                            'y': float(self.ty),
+        # front_lower_left_corner = {'x': float(self.tx) - (float(length)/2),
+        #                            'y': float(self.ty) - (float(width)/2),
         #                            'z': float(self.tz)}
         #
-        # front_lower_right_corner = {'x': float(self.tx) + float(length),
-        #                             'y': float(self.ty),
+        # front_lower_right_corner = {'x': float(self.tx) - (float(length)/2),
+        #                             'y': float(self.ty) + (float(width)/2),
         #                             'z': float(self.tz)}
         #
-        # front_upper_left_corner = {'x': float(self.tx),
-        #                            'y': float(self.ty) + float(width),
-        #                            'z': float(self.tz)}
-        #
-        # front_upper_right_corner = {'x': float(self.tx) + float(length),
-        #                             'y': float(self.ty) + float(width),
-        #                             'z': float(self.tz)}
-        #
-        # back_lower_left_corner = {'x': float(self.tx),
-        #                           'y': float(self.ty),
-        #                           'z': float(self.tz) + float(height)}
-        #
-        # back_lower_right_corner = {'x': float(self.tx) + float(length),
-        #                            'y': float(self.ty),
+        # front_upper_left_corner = {'x': float(self.tx) - (float(length)/2),
+        #                            'y': float(self.ty) - (float(width)/2),
         #                            'z': float(self.tz) + float(height)}
         #
-        # back_upper_left_corner = {'x': float(self.tx),
-        #                           'y': float(self.ty) + float(width),
+        # front_upper_right_corner = {'x': float(self.tx) - (float(length)/2),
+        #                             'y': float(self.ty) + (float(width)/2),
+        #                             'z': float(self.tz) + float(height)}
+        #
+        # back_lower_left_corner = {'x': float(self.tx) + (float(length)/2),
+        #                           'y': float(self.ty) - (float(width)/2),
+        #                           'z': float(self.tz)}
+        #
+        # back_lower_right_corner = {'x': float(self.tx) + (float(length)/2),
+        #                            'y': float(self.ty) + (float(width)/2),
+        #                            'z': float(self.tz)}
+        #
+        # back_upper_left_corner = {'x': float(self.tx) + (float(length)/2),
+        #                           'y': float(self.ty) - (float(width)/2),
         #                           'z': float(self.tz) + float(height)}
         #
-        # back_upper_right_conrner = {'x': float(self.tx) + float(length),
-        #                             'y': float(self.ty) + float(width),
+        # back_upper_right_conrner = {'x': float(self.tx) + (float(length)/2),
+        #                             'y': float(self.ty) + (float(width)/2),
         #                             'z': float(self.tz) + float(height)}
 
-        front_lower_left_corner = {'x': float(self.tx) - (float(length)/2),
-                                   'y': float(self.ty) - (float(width)/2),
-                                   'z': float(self.tz)}
+        front_lower_left = [float(self.tx) - (float(length)/2),
+                            float(self.ty) - (float(width) / 2),
+                            float(self.tz)]
 
-        front_lower_right_corner = {'x': float(self.tx) - (float(length)/2),
-                                    'y': float(self.ty) + (float(width)/2),
-                                    'z': float(self.tz)}
+        front_lower_right = [float(self.tx) - (float(length)/2),
+                             float(self.ty) + (float(width)/2),
+                             float(self.tz)]
 
-        front_upper_left_corner = {'x': float(self.tx) - (float(length)/2),
-                                   'y': float(self.ty) - (float(width)/2),
-                                   'z': float(self.tz) + float(height)}
+        front_upper_left = [float(self.tx) - (float(length)/2),
+                            float(self.ty) - (float(width)/2),
+                            float(self.tz) + float(height)]
 
-        front_upper_right_corner = {'x': float(self.tx) - (float(length)/2),
-                                    'y': float(self.ty) + (float(width)/2),
-                                    'z': float(self.tz) + float(height)}
+        front_upper_right = [float(self.tx) - (float(length)/2),
+                             float(self.ty) + (float(width)/2),
+                             float(self.tz) + float(height)]
 
-        back_lower_left_corner = {'x': float(self.tx) + (float(length)/2),
-                                  'y': float(self.ty) - (float(width)/2),
-                                  'z': float(self.tz)}
+        back_lower_left = [float(self.tx) + (float(length)/2),
+                           float(self.ty) - (float(width)/2),
+                           float(self.tz)]
 
-        back_lower_right_corner = {'x': float(self.tx) + (float(length)/2),
-                                   'y': float(self.ty) + (float(width)/2),
-                                   'z': float(self.tz)}
+        back_lower_right = [float(self.tx) + (float(length)/2),
+                            float(self.ty) + (float(width)/2),
+                            float(self.tz)]
 
-        back_upper_left_corner = {'x': float(self.tx) + (float(length)/2),
-                                  'y': float(self.ty) - (float(width)/2),
-                                  'z': float(self.tz) + float(height)}
+        back_upper_left = [float(self.tx) + (float(length)/2),
+                           float(self.ty) - (float(width)/2),
+                           float(self.tz) + float(height)]
 
-        back_upper_right_conrner = {'x': float(self.tx) + (float(length)/2),
-                                    'y': float(self.ty) + (float(width)/2),
-                                    'z': float(self.tz) + float(height)}
+        back_upper_right = [float(self.tx) + (float(length)/2),
+                            float(self.ty) + (float(width)/2),
+                            float(self.tz) + float(height)]
+
+        r_front_lower_left_corner = self._get_rotated_points(front_lower_left)
+        r_front_lower_right_corner = self._get_rotated_points(front_lower_right)
+        r_front_upper_left_corner = self._get_rotated_points(front_upper_left)
+        r_front_upper_right_corner = self._get_rotated_points(front_upper_right)
+        r_back_lower_left_corner = self._get_rotated_points(back_lower_left)
+        r_back_lower_right_corner = self._get_rotated_points(back_lower_right)
+        r_back_upper_left_corner = self._get_rotated_points(back_upper_left)
+        r_back_upper_right_corner = self._get_rotated_points(back_upper_right)
+
+        # print(r_front_lower_left_corner)
+        # print(r_front_lower_right_corner)
+        # print(r_front_upper_left_corner)
+        # print(r_front_upper_right_corner)
+        # print(r_back_lower_left_corner)
+        # print(r_back_lower_right_corner)
+        # print(r_back_upper_left_corner)
+        # print(r_back_upper_right_corner)
+
+        front_lower_left_corner = {'x': r_front_lower_left_corner[0],
+                                   'y': r_front_lower_left_corner[1],
+                                   'z': r_front_lower_left_corner[2]}
+
+        front_lower_right_corner = {'x': r_front_lower_right_corner[0],
+                                    'y': r_front_lower_right_corner[1],
+                                    'z': r_front_lower_right_corner[2]}
+
+        front_upper_left_corner = {'x': r_front_upper_left_corner[0],
+                                   'y': r_front_upper_left_corner[1],
+                                   'z': r_front_upper_left_corner[2]}
+
+        front_upper_right_corner = {'x': r_front_upper_right_corner[0],
+                                    'y': r_front_upper_right_corner[1],
+                                    'z': r_front_upper_right_corner[2]}
+
+        back_lower_left_corner = {'x': r_back_lower_left_corner[0],
+                                  'y': r_back_lower_left_corner[1],
+                                  'z': r_back_lower_left_corner[2]}
+
+        back_lower_right_corner = {'x': r_back_lower_right_corner[0],
+                                   'y': r_back_lower_right_corner[1],
+                                   'z': r_back_lower_right_corner[2]}
+
+        back_upper_left_corner = {'x': r_back_upper_left_corner[0],
+                                  'y': r_back_upper_left_corner[1],
+                                  'z': r_back_upper_left_corner[2]}
+
+        back_upper_right_conrner = {'x': r_back_upper_right_corner[0],
+                                    'y': r_back_upper_right_corner[1],
+                                    'z': r_back_upper_right_corner[2]}
 
         return front_lower_left_corner, front_lower_right_corner, \
                front_upper_left_corner, front_upper_right_corner, \
                back_lower_left_corner, back_lower_right_corner, \
                back_upper_left_corner, back_upper_right_conrner
+
+    def _get_rotated_points(self, vector):
+        vector = np.asarray(vector)
+
+        axis = [0, 1, 0]
+        first_rotation = np.dot(self._rotation_matrix(axis, float(self.ry)), vector)
+
+        axis = [0, 0, 1]
+        second_rotation = np.dot(self._rotation_matrix(axis, float(self.rz)), first_rotation)
+
+        axis = [1, 0, 0]
+        third_rotation = np.dot(self._rotation_matrix(axis, float(self.rx)), second_rotation)
+
+        return vector
+
+    def _rotation_matrix(self, axis, theta):
+        axis = np.asarray(axis)
+        axis = axis / math.sqrt(np.dot(axis, axis))
+        a = math.cos(theta / 2.0)
+        b, c, d = -axis * math.sin(theta / 2.0)
+        aa, bb, cc, dd = a * a, b * b, c * c, d * d
+        bc, ad, ac, ab, bd, cd = b * c, a * d, a * c, a * b, b * d, c * d
+        return np.array([[aa + bb - cc - dd, 2 * (bc + ad), 2 * (bd - ac)],
+                         [2 * (bc - ad), aa + cc - bb - dd, 2 * (cd + ab)],
+                         [2 * (bd + ac), 2 * (cd - ab), aa + dd - bb - cc]])
 
     def __str__(self):
         print('Frame:\t{}'.format(self.number_of_frame))

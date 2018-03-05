@@ -8,9 +8,9 @@ import plotly
 
 plotly.tools.set_credentials_file(username='panagiotidisxronis', api_key='ttur4sQ0tHGT0m7cz5XT')
 
-drive = '0001'
+drive = '0005'
 frame = 0
-obj = 2
+obj = 0
 
 tracklets = load_single_tracklet(drive)
 

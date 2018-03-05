@@ -8,7 +8,7 @@ import plotly
 
 plotly.tools.set_credentials_file(username='panagiotidisxronis', api_key='ttur4sQ0tHGT0m7cz5XT')
 
-drive = ['0005', '0009']
+drive = ['0001', '0002', '0005', '0009']
 frame = 0
 
 for d in drive:

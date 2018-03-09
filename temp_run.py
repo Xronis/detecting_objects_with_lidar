@@ -4,17 +4,12 @@ import math
 
 import tensorflow as tf
 import numpy as np
+import vpython as vpy
 
 from config.config import base_model_config
 from data.kitti_raw_manager import load_raw_tracklets, load_raw_data
 from plot.plot import plot_bounding_box, plot_velo
 
-from plotly import graph_objs as go
-import plotly.plotly as py
-
-import plotly
-
-plotly.tools.set_credentials_file(username='panagiotidisxronis', api_key='ttur4sQ0tHGT0m7cz5XT')
 
 cfg = base_model_config()
 

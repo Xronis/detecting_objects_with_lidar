@@ -2,6 +2,7 @@ import xml.etree.ElementTree as ET
 
 import pykitti
 import plotly
+import numpy as np
 
 import data.IndividualObject as IndividualObject
 from config.config import base_model_config
@@ -24,6 +25,24 @@ def load_raw_data(drive):
     for x in dataset.velo:
         velo_data.append(x)
 
+    return velo_data
+
+
+def load_raw_forward_data(drive, y_threshold=32):
+    basedir = cfg.basedir+drive
+    date = cfg.date
+
+    dataset = pykitti.raw(basedir, date, drive)
+
+    velo_data = []
+
+    for frame in dataset.velo:
+
+        over_x_0 = frame[frame[:, 0] > 0]
+        under_y_threshold = over_x_0[over_x_0[:, 1] < y_threshold]
+        over_y_neg32 = under_y_threshold[under_y_threshold[:, 1] > -y_threshold]
+
+        velo_data.append(over_y_neg32)
     return velo_data
 
 

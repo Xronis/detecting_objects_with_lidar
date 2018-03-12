@@ -1,12 +1,82 @@
+import numpy as np
 from plotly import graph_objs as go
 import plotly.plotly as py
 
 import plotly
 
+from data.kitti_raw_manager import load_raw_tracklets, load_raw_forward_data
+
 plotly.tools.set_credentials_file(username='panagiotidisxronis', api_key='ttur4sQ0tHGT0m7cz5XT')
 
 
-def plot_velo(velo_data):
+def plot_scan_with_bbox(drive, frame, y_threshold):
+    for d in drive:
+        tracklets = load_raw_tracklets(d)
+
+        bbox_traces = []
+
+        for tracklet in tracklets:
+            if frame in tracklet.frames:
+
+                pose = tracklet.get_pose_of_frame(frame)
+
+                front_lower_left_corner, front_lower_right_corner, \
+                front_upper_left_corner, front_upper_right_corner, \
+                back_lower_left_corner, back_lower_right_corner, \
+                back_upper_left_corner, back_upper_right_corner = pose.get_corners_of_bounding_box(tracklet.height,
+                                                                                                   tracklet.width,
+                                                                                                   tracklet.length)
+
+                inside_y_bounds = np.array([front_lower_left_corner['y'] > -y_threshold,
+                                            front_lower_left_corner['y'] < y_threshold,
+                                            front_lower_right_corner['y'] > -y_threshold,
+                                            front_lower_right_corner['y'] < y_threshold,
+                                            front_upper_left_corner['y'] > -y_threshold,
+                                            front_upper_left_corner['y'] < y_threshold,
+                                            front_upper_right_corner['y'] > -y_threshold,
+                                            front_upper_right_corner['y'] < y_threshold,
+                                            back_lower_left_corner['y'] > -y_threshold,
+                                            back_lower_left_corner['y'] < y_threshold,
+                                            back_lower_right_corner['y'] > -y_threshold,
+                                            back_lower_right_corner['y'] < y_threshold,
+                                            back_upper_left_corner['y'] > -y_threshold,
+                                            back_upper_left_corner['y'] < y_threshold,
+                                            back_upper_right_corner['y'] > -y_threshold,
+                                            back_upper_right_corner['y'] < y_threshold,
+                                            ])
+                if inside_y_bounds.all():
+                    bbox = _plot_bounding_box(front_lower_left_corner, front_lower_right_corner,
+                                              front_upper_left_corner, front_upper_right_corner,
+                                              back_lower_left_corner, back_lower_right_corner,
+                                              back_upper_left_corner, back_upper_right_corner)
+
+                    for b in bbox:
+                        bbox_traces.append(b)
+
+        data = load_raw_forward_data(d, y_threshold=y_threshold)
+        scan_traces = _plot_velo(data[frame])
+
+        layout = go.Layout(
+            scene=dict(
+                xaxis=dict(nticks=4, range=[-100, 100], ),
+                yaxis=dict(nticks=4, range=[-50, 100], ),
+                zaxis=dict(nticks=4, range=[-100, 100], ),
+                aspectratio=dict(x=1, y=1, z=1)),
+            width=700,
+            margin=dict(r=0, l=0, b=0, t=0)
+        )
+
+        data = [scan_traces[0]]
+
+        for bb in bbox_traces:
+            data.append(bb)
+
+        fig = go.Figure(data=data, layout=layout)
+        py.plot(fig, filename='scan_with_tracklet_{}'.format(d))
+        # plotly.offline.plot(fig, filename='scan_with_tracklet_{}'.format(d))
+
+
+def _plot_velo(velo_data):
     trace = go.Scatter3d(x=velo_data[:, 0],
                          y=velo_data[:, 1],
                          z=velo_data[:, 2],
@@ -16,27 +86,13 @@ def plot_velo(velo_data):
                                                width=0.2),
                                      opacity=0.0))
 
-    data = [trace]
-
-    layout = go.Layout(
-        scene=dict(
-            xaxis=dict(nticks=4, range=[-100, 100], ),
-            yaxis=dict(nticks=4, range=[-50, 100], ),
-            zaxis=dict(nticks=4, range=[-100, 100], ), ),
-        width=700,
-        margin=dict(r=20, l=10, b=10, t=10)
-    )
-
-    # fig = go.Figure(data=data, layout=layout)
-    # py.plot(fig, filename='scan')
-
-    return data
+    return [trace]
 
 
-def plot_bounding_box(front_lower_left_corner, front_lower_right_corner,
-                      front_upper_left_corner, front_upper_right_corner,
-                      back_lower_left_corner, back_lower_right_corner,
-                      back_upper_left_corner, back_upper_right_corner):
+def _plot_bounding_box(front_lower_left_corner, front_lower_right_corner,
+                       front_upper_left_corner, front_upper_right_corner,
+                       back_lower_left_corner, back_lower_right_corner,
+                       back_upper_left_corner, back_upper_right_corner):
 
     x = [front_lower_left_corner['x'], front_lower_right_corner['x'],
          back_lower_left_corner['x'], back_lower_right_corner['x'],
@@ -86,8 +142,5 @@ def plot_bounding_box(front_lower_left_corner, front_lower_right_corner,
         z=z_lines,
         mode='lines'
     )
-
-    # fig = go.Figure(data=[trace1, trace2])
-    # py.plot(fig, filename='simple-3d-scatter')
 
     return [trace1, trace2]

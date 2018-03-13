@@ -1,3 +1,5 @@
+import math
+
 import numpy as np
 from plotly import graph_objs as go
 import plotly.plotly as py
@@ -9,11 +11,20 @@ from data.kitti_raw_manager import load_raw_tracklets, load_raw_forward_data
 plotly.tools.set_credentials_file(username='panagiotidisxronis', api_key='ttur4sQ0tHGT0m7cz5XT')
 
 
-def plot_scan_with_bbox(drive, frame, y_threshold):
+def plot_scan_with_bbox(drive, frame, y_threshold, one_out_of):
     for d in drive:
         tracklets = load_raw_tracklets(d)
 
         bbox_traces = []
+
+        if y_threshold and one_out_of:
+            data = load_raw_forward_data(d, one_out_of=one_out_of, y_threshold=y_threshold)
+        elif y_threshold and not one_out_of:
+            data = load_raw_forward_data(d, y_threshold=y_threshold)
+        elif not y_threshold and one_out_of:
+            data = load_raw_forward_data(d, one_out_of=one_out_of)
+        else:
+            data = load_raw_forward_data(d)
 
         for tracklet in tracklets:
             if frame in tracklet.frames:
@@ -26,34 +37,47 @@ def plot_scan_with_bbox(drive, frame, y_threshold):
                 back_upper_left_corner, back_upper_right_corner = pose.get_corners_of_bounding_box(tracklet.height,
                                                                                                    tracklet.width,
                                                                                                    tracklet.length)
+                if not y_threshold:
+                    threshold = np.inf
+                else:
+                    threshold = y_threshold
 
-                inside_y_bounds = np.array([front_lower_left_corner['y'] > -y_threshold,
-                                            front_lower_left_corner['y'] < y_threshold,
-                                            front_lower_right_corner['y'] > -y_threshold,
-                                            front_lower_right_corner['y'] < y_threshold,
-                                            front_upper_left_corner['y'] > -y_threshold,
-                                            front_upper_left_corner['y'] < y_threshold,
-                                            front_upper_right_corner['y'] > -y_threshold,
-                                            front_upper_right_corner['y'] < y_threshold,
-                                            back_lower_left_corner['y'] > -y_threshold,
-                                            back_lower_left_corner['y'] < y_threshold,
-                                            back_lower_right_corner['y'] > -y_threshold,
-                                            back_lower_right_corner['y'] < y_threshold,
-                                            back_upper_left_corner['y'] > -y_threshold,
-                                            back_upper_left_corner['y'] < y_threshold,
-                                            back_upper_right_corner['y'] > -y_threshold,
-                                            back_upper_right_corner['y'] < y_threshold,
+                inside_y_bounds = np.array([front_lower_left_corner['y'] > -threshold,
+                                            front_lower_left_corner['y'] < threshold,
+                                            front_lower_right_corner['y'] > -threshold,
+                                            front_lower_right_corner['y'] < threshold,
+                                            front_upper_left_corner['y'] > -threshold,
+                                            front_upper_left_corner['y'] < threshold,
+                                            front_upper_right_corner['y'] > -threshold,
+                                            front_upper_right_corner['y'] < threshold,
+                                            back_lower_left_corner['y'] > -threshold,
+                                            back_lower_left_corner['y'] < threshold,
+                                            back_lower_right_corner['y'] > -threshold,
+                                            back_lower_right_corner['y'] < threshold,
+                                            back_upper_left_corner['y'] > -threshold,
+                                            back_upper_left_corner['y'] < threshold,
+                                            back_upper_right_corner['y'] > -threshold,
+                                            back_upper_right_corner['y'] < threshold
                                             ])
+
                 if inside_y_bounds.all():
                     bbox = _plot_bounding_box(front_lower_left_corner, front_lower_right_corner,
                                               front_upper_left_corner, front_upper_right_corner,
                                               back_lower_left_corner, back_lower_right_corner,
                                               back_upper_left_corner, back_upper_right_corner)
 
-                    for b in bbox:
-                        bbox_traces.append(b)
+                    if one_out_of:
+                        if _bbox_has_point(data[frame], front_lower_left_corner, front_lower_right_corner,
+                                           front_upper_left_corner, back_lower_left_corner, back_lower_right_corner):
+                            for b in bbox:
+                                bbox_traces.append(b)
+                    else:
+                        for b in bbox:
+                            bbox_traces.append(b)
 
-        data = load_raw_forward_data(d, y_threshold=y_threshold)
+                    # for b in bbox:
+                    #     bbox_traces.append(b)
+
         scan_traces = _plot_velo(data[frame])
 
         layout = go.Layout(
@@ -144,3 +168,25 @@ def _plot_bounding_box(front_lower_left_corner, front_lower_right_corner,
     )
 
     return [trace1, trace2]
+
+
+def _bbox_has_point(scan, front_lower_left_corner, front_lower_right_corner,
+                    front_upper_left_corner, back_lower_left_corner, back_lower_right_corner):
+
+    for i in range(len(scan)):
+        point = scan[i]
+
+        x = point[0]
+        y = point[1]
+        z = point[2]
+
+        cond = np.array([x >= front_lower_left_corner['x'], x >= front_lower_right_corner['x'],
+ +                        x <= back_lower_left_corner['x'], x <= back_lower_right_corner['x'],
+                         y <= front_lower_left_corner['y'], y >= front_lower_right_corner['y'],
+                         y <= back_lower_left_corner['y'], y >= back_lower_right_corner['y'],
+                         z >= front_lower_left_corner['z'], z <= front_upper_left_corner['z']])
+
+        if cond.all():
+            return True
+
+    return False

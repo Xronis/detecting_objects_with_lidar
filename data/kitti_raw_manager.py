@@ -28,7 +28,7 @@ def load_raw_data(drive):
     return velo_data
 
 
-def load_raw_forward_data(drive, y_threshold=32):
+def load_raw_forward_data(drive, one_out_of=None, y_threshold=None):
     basedir = cfg.basedir+drive
     date = cfg.date
 
@@ -37,12 +37,24 @@ def load_raw_forward_data(drive, y_threshold=32):
     velo_data = []
 
     for frame in dataset.velo:
-
         over_x_0 = frame[frame[:, 0] > 0]
-        under_y_threshold = over_x_0[over_x_0[:, 1] < y_threshold]
-        over_y_neg32 = under_y_threshold[under_y_threshold[:, 1] > -y_threshold]
 
-        velo_data.append(over_y_neg32)
+        if y_threshold:
+            under_y_threshold = over_x_0[over_x_0[:, 1] < y_threshold]
+            over_y_threshold = under_y_threshold[under_y_threshold[:, 1] > -y_threshold]
+
+            if one_out_of:
+                downscaled = _downscale_scan(over_y_threshold, one_out_of)
+                velo_data.append(downscaled)
+            else:
+                velo_data.append(over_y_threshold)
+        else:
+            if one_out_of:
+                downscaled = _downscale_scan(over_x_0, one_out_of)
+                velo_data.append(downscaled)
+            else:
+                velo_data.append(over_x_0)
+
     return velo_data
 
 
@@ -188,3 +200,14 @@ def _poses_of_each_object_from_file(tx, ty, tz, rx, ry, rz, last_frame, first_fr
     rotation_z = rz[first_frame:index]
 
     return tracklet_x, tracklet_y, tracklet_z, rotation_x, rotation_y, rotation_z
+
+
+def _downscale_scan(array_to_scale, one_out_of):
+
+    ret = []
+
+    for i in range(len(array_to_scale)):
+        if i % one_out_of == 0:
+            ret.append(array_to_scale[i])
+
+    return np.asarray(ret)

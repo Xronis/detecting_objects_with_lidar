@@ -12,17 +12,16 @@ plotly.tools.set_credentials_file(username='panagiotidisxronis', api_key='ttur4s
 
 
 def plot_scan_with_bbox(drive, frame, y_threshold, one_out_of):
+    bounding_boxes = {}
+    bb_index = 0
+
     for d in drive:
         tracklets = load_raw_tracklets(d)
 
         bbox_traces = []
 
         if y_threshold and one_out_of:
-            data = load_raw_forward_data(d, one_out_of=one_out_of, y_threshold=y_threshold)
-        elif y_threshold and not one_out_of:
             data = load_raw_forward_data(d, y_threshold=y_threshold)
-        elif not y_threshold and one_out_of:
-            data = load_raw_forward_data(d, one_out_of=one_out_of)
         else:
             data = load_raw_forward_data(d)
 
@@ -66,19 +65,38 @@ def plot_scan_with_bbox(drive, frame, y_threshold, one_out_of):
                                               back_lower_left_corner, back_lower_right_corner,
                                               back_upper_left_corner, back_upper_right_corner)
 
-                    if one_out_of:
-                        if _bbox_has_point(data[frame], front_lower_left_corner, front_lower_right_corner,
-                                           front_upper_left_corner, back_lower_left_corner, back_lower_right_corner):
-                            for b in bbox:
-                                bbox_traces.append(b)
-                    else:
-                        for b in bbox:
-                            bbox_traces.append(b)
+                    bounding_box = {'fll': front_lower_left_corner,
+                                    'flr': front_lower_right_corner,
+                                    'ful': front_upper_left_corner,
+                                    'fur': front_upper_right_corner,
+                                    'bll': back_lower_left_corner,
+                                    'blr': back_lower_right_corner,
+                                    'bul': back_upper_left_corner,
+                                    'bur': back_upper_right_corner}
 
-                    # for b in bbox:
-                    #     bbox_traces.append(b)
+                    bounding_boxes['bb'+str(bb_index)] = bounding_box
+                    bb_index += 1
 
-        scan_traces = _plot_velo(data[frame])
+                    # if one_out_of:
+                    #     if _bbox_has_point(data[frame], front_lower_left_corner, front_lower_right_corner, back_lower_left_corner,
+                    #                        back_lower_right_corner, back_upper_left_corner):
+                    #         for b in bbox:
+                    #             bbox_traces.append(b)
+                    # else:
+                    #     for b in bbox:
+                    #         bbox_traces.append(b)
+
+                    for b in bbox:
+                        bbox_traces.append(b)
+
+        if one_out_of:
+            scan = _get_sparse_scan(data[frame], bounding_boxes, one_out_of)
+        else:
+            scan = data[frame]
+
+        temp = data[frame]
+
+        scan_traces = _plot_velo(scan)
 
         layout = go.Layout(
             scene=dict(
@@ -90,12 +108,12 @@ def plot_scan_with_bbox(drive, frame, y_threshold, one_out_of):
             margin=dict(r=0, l=0, b=0, t=0)
         )
 
-        data = [scan_traces[0]]
+        fig_data = [scan_traces[0]]
 
         for bb in bbox_traces:
-            data.append(bb)
+            fig_data.append(bb)
 
-        fig = go.Figure(data=data, layout=layout)
+        fig = go.Figure(data=fig_data, layout=layout)
         py.plot(fig, filename='scan_with_tracklet_{}'.format(d))
         # plotly.offline.plot(fig, filename='scan_with_tracklet_{}'.format(d))
 
@@ -170,23 +188,40 @@ def _plot_bounding_box(front_lower_left_corner, front_lower_right_corner,
     return [trace1, trace2]
 
 
-def _bbox_has_point(scan, front_lower_left_corner, front_lower_right_corner,
-                    front_upper_left_corner, back_lower_left_corner, back_lower_right_corner):
+def _bbox_has_point(scan, front_lower_left_corner, front_lower_right_corner, back_lower_left_corner,
+                    back_lower_right_corner, back_upper_left_corner):
 
     for i in range(len(scan)):
         point = scan[i]
 
-        x = point[0]
-        y = point[1]
-        z = point[2]
-
-        cond = np.array([x >= front_lower_left_corner['x'], x >= front_lower_right_corner['x'],
- +                        x <= back_lower_left_corner['x'], x <= back_lower_right_corner['x'],
-                         y <= front_lower_left_corner['y'], y >= front_lower_right_corner['y'],
-                         y <= back_lower_left_corner['y'], y >= back_lower_right_corner['y'],
-                         z >= front_lower_left_corner['z'], z <= front_upper_left_corner['z']])
+        cond = np.array([point[0] >= back_lower_left_corner['x'], point[1] <= back_lower_left_corner['y'], point[2] >= back_lower_left_corner['z'],
+                         point[0] >= back_lower_right_corner['x'], point[1] >= back_lower_right_corner['y'],
+                         point[2] <= back_upper_left_corner['z'],
+                         point[0] <= front_lower_left_corner['x'], point[1] <= front_lower_left_corner['y'],
+                         point[0] < front_lower_right_corner['x'], point[1] >= front_lower_right_corner['y']])
 
         if cond.all():
             return True
 
     return False
+
+
+def _get_sparse_scan(scan, bboxes, one_out_of):
+    sparse_scan = []
+
+    for i in range(len(scan)):
+        point = scan[i]
+
+        for _, value in bboxes.items():
+            cond = np.array([point[0] >= value['bll']['x'], point[1] <= value['bll']['y'], point[2] >= value['bll']['z'],
+                             point[0] >= value['blr']['x'], point[1] >= value['blr']['y'],
+                             point[2] <= value['bul']['z'],
+                             point[0] <= value['fll']['x'], point[1] <= value['fll']['y'],
+                             point[0] <= value['flr']['x'], point[1] >= value['flr']['y']])
+
+            if cond.all():
+                sparse_scan.append(point)
+            elif i % one_out_of == 0:
+                sparse_scan.append(point)
+
+    return np.array(sparse_scan)

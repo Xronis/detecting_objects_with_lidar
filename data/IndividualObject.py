@@ -29,7 +29,6 @@ class IndividualObject:
         for pose in self.poses:
             if pose.number_of_frame == frame:
                 return pose
-        print('No pose of this object in that frame')
 
     def __str__(self):
         print('--------------------------------------------- NEW OBJECT ---------------------------------------------')
@@ -64,35 +63,35 @@ class Pose:
 
         origin = 0
 
-        o_front_lower_left = [origin - (length / 2),
+        o_back_lower_right = [origin - (length / 2),
                               origin - (width / 2),
                               origin]
 
-        o_front_lower_right = [origin - (length / 2),
-                               origin + (width / 2),
-                               origin]
+        o_back_lower_left = [origin - (length / 2),
+                             origin + (width / 2),
+                             origin]
 
-        o_front_upper_left = [origin - (length / 2),
+        o_back_upper_right = [origin - (length / 2),
                               origin - (width / 2),
                               origin + height]
 
-        o_front_upper_right = [origin - (length / 2),
-                               origin + (width / 2),
-                               origin + height]
+        o_back_upper_left = [origin - (length / 2),
+                             origin + (width / 2),
+                             origin + height]
 
-        o_back_lower_left = [origin + (length / 2),
-                             origin - (width / 2),
-                             origin]
+        o_front_lower_right = [origin + (length / 2),
+                               origin - (width / 2),
+                               origin]
 
-        o_back_lower_right = [origin + (length / 2),
+        o_front_lower_left = [origin + (length / 2),
                               origin + (width / 2),
                               origin]
 
-        o_back_upper_left = [origin + (length / 2),
-                             origin - (width / 2),
-                             origin + height]
+        o_front_upper_right = [origin + (length / 2),
+                               origin - (width / 2),
+                               origin + height]
 
-        o_back_upper_right = [origin + (length / 2),
+        o_front_upper_left = [origin + (length / 2),
                               origin + (width / 2),
                               origin + height]
 

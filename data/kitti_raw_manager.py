@@ -1,7 +1,7 @@
+import math
 import xml.etree.ElementTree as ET
 
 import pykitti
-import plotly
 import numpy as np
 
 import data.IndividualObject as IndividualObject
@@ -20,12 +20,7 @@ def load_raw_data(drive):
 
     dataset = pykitti.raw(basedir, date, drive)
 
-    velo_data = []
-
-    for x in dataset.velo:
-        velo_data.append(x)
-
-    return velo_data
+    return [x for x in dataset.velo]
 
 
 def load_raw_forward_data(drive, one_out_of=None, y_threshold=None):
@@ -34,28 +29,7 @@ def load_raw_forward_data(drive, one_out_of=None, y_threshold=None):
 
     dataset = pykitti.raw(basedir, date, drive)
 
-    velo_data = []
-
-    for frame in dataset.velo:
-        over_x_0 = frame[frame[:, 0] > 0]
-
-        if y_threshold:
-            under_y_threshold = over_x_0[over_x_0[:, 1] < y_threshold]
-            over_y_threshold = under_y_threshold[under_y_threshold[:, 1] > -y_threshold]
-
-            if one_out_of:
-                downscaled = _downscale_scan(over_y_threshold, one_out_of)
-                velo_data.append(downscaled)
-            else:
-                velo_data.append(over_y_threshold)
-        else:
-            if one_out_of:
-                downscaled = _downscale_scan(over_x_0, one_out_of)
-                velo_data.append(downscaled)
-            else:
-                velo_data.append(over_x_0)
-
-    return velo_data
+    return [_get_points_with_threshold(frame, y_threshold, one_out_of) for frame in dataset.velo]
 
 
 def load_single_tracklet(drive):
@@ -96,6 +70,29 @@ def load_raw_tracklets(drive):
                                                            int(count[i])))
 
     return tracklets
+
+
+def get_spherical_data(frame):
+    spherical_frame = []
+    spherical_data = []
+    # for frame in scan:
+    for x, y, z, r in frame:
+        radial_distance = np.sqrt(np.power(x, 2) + np.power(y, 2) + np.power(z, 2))
+
+        if z != 0:
+            theta = np.arctan(np.sqrt(np.power(x, 2) + np.power(y, 2)) / z)
+        else:
+            theta = np.arctan(np.sqrt(np.power(x, 2) + np.power(y, 2)))
+
+        if x != 0:
+            phi = np.arctan(y / x)
+        else:
+            phi = np.arctan(y)
+
+        spherical_frame.append([radial_distance, phi, theta, r])
+        # spherical_data.append(spherical_frame)
+
+    return spherical_frame
 
 
 def _get_attributes_of_pose_from_file(poses):
@@ -151,16 +148,19 @@ def _get_attribute_of_objects_from_file(tree, path):
 
 
 def _iter_through_objects(elements):
-    items = []
-
-    for child in elements:
-        items.append(child.text)
-
-    return items
+    return [child.text for child in elements]
 
 
 def _get_all_poses_from_file(tx, ty, tz, rx, ry, rz, count):
     global index
+
+    # tracklet_x = [_temp(tx, int(count[i], index)) for i in range(len(count))]
+    # tracklet_y = [_temp(ty, int(count[i], index)) for i in range(len(count))]
+    # tracklet_z = [_temp(tz, int(count[i], index)) for i in range(len(count))]
+    #
+    # rotation_x = [_temp(rx, int(count[i], index)) for i in range(len(count))]
+    # rotation_y = [_temp(ry, int(count[i], index)) for i in range(len(count))]
+    # rotation_z = [_temp(rz, int(count[i], index)) for i in range(len(count))]
 
     tracklet_x = []
     tracklet_y = []
@@ -186,6 +186,11 @@ def _get_all_poses_from_file(tx, ty, tz, rx, ry, rz, count):
     return tracklet_x, tracklet_y, tracklet_z, rotation_x, rotation_y, rotation_z
 
 
+# def _temp(array_to_slice, last_frame, first_frame=0):
+#     global index
+#     return array_to_slice[first_frame:first_frame + last_frame]
+
+
 def _poses_of_each_object_from_file(tx, ty, tz, rx, ry, rz, last_frame, first_frame=0):
     global index
 
@@ -200,6 +205,24 @@ def _poses_of_each_object_from_file(tx, ty, tz, rx, ry, rz, last_frame, first_fr
     rotation_z = rz[first_frame:index]
 
     return tracklet_x, tracklet_y, tracklet_z, rotation_x, rotation_y, rotation_z
+
+
+def _get_points_with_threshold(frame, y_threshold=None, one_out_of=None):
+    over_x_0 = frame[frame[:, 0] > 0]
+
+    if y_threshold:
+        under_y_threshold = over_x_0[over_x_0[:, 1] < y_threshold]
+        over_y_threshold = under_y_threshold[under_y_threshold[:, 1] > -y_threshold]
+
+        if one_out_of:
+            return _downscale_scan(over_y_threshold, one_out_of)
+        else:
+            return over_y_threshold
+    else:
+        if one_out_of:
+            return _downscale_scan(over_x_0, one_out_of)
+        else:
+            return over_x_0
 
 
 def _downscale_scan(array_to_scale, one_out_of):

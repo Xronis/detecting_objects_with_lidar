@@ -34,28 +34,30 @@ def load_raw_forward_data(drive, one_out_of=None, y_threshold=None):
 
     dataset = pykitti.raw(basedir, date, drive)
 
-    velo_data = []
+    return [_get_points_with_threshold(frame, y_threshold, one_out_of) for frame in dataset.velo]
 
-    for frame in dataset.velo:
-        over_x_0 = frame[frame[:, 0] > 0]
 
-        if y_threshold:
-            under_y_threshold = over_x_0[over_x_0[:, 1] < y_threshold]
-            over_y_threshold = under_y_threshold[under_y_threshold[:, 1] > -y_threshold]
+def get_spherical_data(frame):
+    spherical_frame = []
+    spherical_data = []
+    # for frame in scan:
+    for x, y, z, r in frame:
+        radial_distance = np.sqrt(np.power(x, 2) + np.power(y, 2) + np.power(z, 2))
 
-            if one_out_of:
-                downscaled = _downscale_scan(over_y_threshold, one_out_of)
-                velo_data.append(downscaled)
-            else:
-                velo_data.append(over_y_threshold)
+        if z != 0:
+            theta = np.arctan(np.sqrt(np.power(x, 2) + np.power(y, 2)) / z)
         else:
-            if one_out_of:
-                downscaled = _downscale_scan(over_x_0, one_out_of)
-                velo_data.append(downscaled)
-            else:
-                velo_data.append(over_x_0)
+            theta = np.arctan(np.sqrt(np.power(x, 2) + np.power(y, 2)))
 
-    return velo_data
+        if x != 0:
+            phi = np.arctan(y / x)
+        else:
+            phi = np.arctan(y)
+
+        spherical_frame.append([radial_distance, phi, theta, r])
+        # spherical_data.append(spherical_frame)
+
+    return np.array(spherical_frame)
 
 
 def load_single_tracklet(drive):
@@ -211,3 +213,21 @@ def _downscale_scan(array_to_scale, one_out_of):
             ret.append(array_to_scale[i])
 
     return np.asarray(ret)
+
+
+def _get_points_with_threshold(frame, y_threshold=None, one_out_of=None):
+    over_x_0 = frame[frame[:, 0] > 0]
+
+    if y_threshold:
+        under_y_threshold = over_x_0[over_x_0[:, 1] < y_threshold]
+        over_y_threshold = under_y_threshold[under_y_threshold[:, 1] > -y_threshold]
+
+        if one_out_of:
+            return _downscale_scan(over_y_threshold, one_out_of)
+        else:
+            return over_y_threshold
+    else:
+        if one_out_of:
+            return _downscale_scan(over_x_0, one_out_of)
+        else:
+            return over_x_0

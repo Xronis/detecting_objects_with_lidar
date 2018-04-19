@@ -1,4 +1,4 @@
-import os
+import os, random
 
 import tensorflow as tf
 import numpy as np
@@ -20,13 +20,12 @@ def main(args=None):
     tf.gfile.MakeDirs(cfg.log_dir)
 
     drives = os.listdir(cfg.basedir)
-    frame = load_raw_forward_data('0001')[0]
+    frame = load_raw_forward_data('0002')[0]
 
-    spherical = get_spherical_data(frame)
+    spherical = np.reshape(get_spherical_data(frame)[:8192, -1], [32, 256])
 
-    img = Image.fromarray(spherical, 'L')
-    img.save('my.png')
-    img.show()
+    plt.imshow(spherical)
+    plt.show()
 
 
 if __name__ == '__main__':

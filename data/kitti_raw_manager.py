@@ -28,13 +28,13 @@ def load_raw_data(drive):
     return velo_data
 
 
-def load_raw_forward_data(drive, one_out_of=None, y_threshold=None):
+def load_raw_forward_data(drive, length=None, one_out_of=None, width=None):
     basedir = cfg.basedir+drive
     date = cfg.date
 
     dataset = pykitti.raw(basedir, date, drive)
 
-    return [_get_points_with_threshold(frame, y_threshold, one_out_of) for frame in dataset.velo]
+    return [_get_points_with_threshold(frame, width, length, one_out_of) for frame in dataset.velo]
 
 
 def get_spherical_data(frame):
@@ -215,12 +215,17 @@ def _downscale_scan(array_to_scale, one_out_of):
     return np.asarray(ret)
 
 
-def _get_points_with_threshold(frame, y_threshold=None, one_out_of=None):
-    over_x_0 = frame[frame[:, 0] > 0]
+def _get_points_with_threshold(frame, width=None, length=None, one_out_of=None):
+    over_x_5 = frame[frame[:, 0] > 5]
 
-    if y_threshold:
-        under_y_threshold = over_x_0[over_x_0[:, 1] < y_threshold]
-        over_y_threshold = under_y_threshold[under_y_threshold[:, 1] > -y_threshold]
+    if length:
+        over_x_5 = over_x_5[over_x_5[:, 0] < length]
+
+    over_x_5 = over_x_5[over_x_5[:, 2] > -2]
+
+    if width:
+        under_y_threshold = over_x_5[over_x_5[:, 1] < width]
+        over_y_threshold = under_y_threshold[under_y_threshold[:, 1] > -width]
 
         if one_out_of:
             return _downscale_scan(over_y_threshold, one_out_of)
@@ -228,6 +233,6 @@ def _get_points_with_threshold(frame, y_threshold=None, one_out_of=None):
             return over_y_threshold
     else:
         if one_out_of:
-            return _downscale_scan(over_x_0, one_out_of)
+            return _downscale_scan(over_x_5, one_out_of)
         else:
-            return over_x_0
+            return over_x_5

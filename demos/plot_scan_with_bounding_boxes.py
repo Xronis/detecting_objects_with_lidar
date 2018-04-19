@@ -1,10 +1,11 @@
 from plot.plot import plot_scan_with_bbox
 
-drive = ['0005']
+drive = ['0001']
 frame = 0
-y_threshold = None
+width = 15.0
+length = 100.0
 one_out_of = None
 
 
-plot_scan_with_bbox(drive=drive, frame=frame, y_threshold=y_threshold, one_out_of=one_out_of)
+plot_scan_with_bbox(drive=drive, frame=frame, width=width, length=length, one_out_of=one_out_of)
 

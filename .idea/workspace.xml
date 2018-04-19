@@ -3,8 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="02cf1eb6-5d3d-4bf6-964b-ace2fc63a643" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change beforePath="$PROJECT_DIR$/data/kitti_raw_manager.py" afterPath="$PROJECT_DIR$/data/kitti_raw_manager.py" />
       <change beforePath="$PROJECT_DIR$/demos/plot_scan_with_bounding_boxes.py" afterPath="$PROJECT_DIR$/demos/plot_scan_with_bounding_boxes.py" />
-      <change beforePath="$PROJECT_DIR$/log/log" afterPath="" />
       <change beforePath="$PROJECT_DIR$/plot/plot.py" afterPath="$PROJECT_DIR$/plot/plot.py" />
       <change beforePath="$PROJECT_DIR$/temp_run.py" afterPath="$PROJECT_DIR$/temp_run.py" />
     </list>
@@ -20,21 +20,20 @@
       <file leaf-file-name="plot_scan_with_bounding_boxes.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/demos/plot_scan_with_bounding_boxes.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="85">
-              <caret line="5" column="14" lean-forward="false" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="14" />
+            <state relative-caret-position="187">
+              <caret line="11" column="0" lean-forward="true" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="plot.py" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/plot/plot.py">
+      <file leaf-file-name="temp_run.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/temp_run.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="436">
-              <caret line="214" column="20" lean-forward="true" selection-start-line="214" selection-start-column="20" selection-end-line="214" selection-end-column="20" />
+            <state relative-caret-position="390">
+              <caret line="25" column="0" lean-forward="true" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
               <folding>
-                <element signature="e#0#11#0" expanded="true" />
-                <element signature="e#6185#7875#0" expanded="false" />
+                <element signature="e#0#17#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -43,29 +42,35 @@
       <file leaf-file-name="kitti_raw_manager.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/data/kitti_raw_manager.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="118">
-              <caret line="31" column="31" lean-forward="true" selection-start-line="31" selection-start-column="31" selection-end-line="31" selection-end-column="31" />
+            <state relative-caret-position="211">
+              <caret line="39" column="4" lean-forward="false" selection-start-line="39" selection-start-column="4" selection-end-line="39" selection-end-column="4" />
               <folding>
                 <element signature="e#0#34#0" expanded="true" />
-                <element signature="e#1388#1420#0" expanded="false" />
-                <element signature="e#1458#3135#0" expanded="false" />
-                <element signature="e#3188#3919#0" expanded="false" />
-                <element signature="e#3973#4451#0" expanded="false" />
-                <element signature="e#4511#4559#0" expanded="false" />
-                <element signature="e#4603#4692#0" expanded="false" />
-                <element signature="e#4760#5553#0" expanded="false" />
-                <element signature="e#5648#6017#0" expanded="false" />
+                <element signature="e#1419#1451#0" expanded="false" />
+                <element signature="e#3219#3950#0" expanded="false" />
+                <element signature="e#4004#4482#0" expanded="false" />
+                <element signature="e#4542#4590#0" expanded="false" />
+                <element signature="e#4634#4723#0" expanded="false" />
+                <element signature="e#4791#5584#0" expanded="false" />
+                <element signature="e#5679#6048#0" expanded="false" />
+                <element signature="e#6105#6257#0" expanded="false" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="temp_run.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/temp_run.py">
+      <file leaf-file-name="plot.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/plot/plot.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="391">
-              <caret line="30" column="60" lean-forward="true" selection-start-line="30" selection-start-column="60" selection-end-line="30" selection-end-column="60" />
-              <folding />
+            <state relative-caret-position="85">
+              <caret line="93" column="16" lean-forward="true" selection-start-line="93" selection-start-column="16" selection-end-line="93" selection-end-column="16" />
+              <folding>
+                <element signature="e#0#19#0" expanded="true" />
+                <element signature="e#5645#6440#0" expanded="false" />
+                <element signature="e#7200#8890#0" expanded="false" />
+                <element signature="e#9069#9729#0" expanded="false" />
+                <element signature="e#10022#10068#0" expanded="false" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -108,14 +113,15 @@
         <option value="$PROJECT_DIR$/demos/get_pose_of_object_for_frame.py" />
         <option value="$PROJECT_DIR$/demos/load_and_plot_single_tracklet.py" />
         <option value="$PROJECT_DIR$/demos/plot_scan_with_one_bounding_box.py" />
-        <option value="$PROJECT_DIR$/data/IndividualObject.py" />
         <option value="$PROJECT_DIR$/data/preprocessing_manager.py" />
         <option value="$PROJECT_DIR$/data/batch_manager.py" />
         <option value="$PROJECT_DIR$/config/config.py" />
-        <option value="$PROJECT_DIR$/temp_run.py" />
+        <option value="$PROJECT_DIR$/data/IndividualObject.py" />
+        <option value="$PROJECT_DIR$/temp.py" />
         <option value="$PROJECT_DIR$/data/kitti_raw_manager.py" />
         <option value="$PROJECT_DIR$/demos/plot_scan_with_bounding_boxes.py" />
         <option value="$PROJECT_DIR$/plot/plot.py" />
+        <option value="$PROJECT_DIR$/temp_run.py" />
       </list>
     </option>
   </component>
@@ -147,35 +153,35 @@
         <subPane>
           <expand>
             <path>
-              <item name="Thesis" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Thesis" type="462c0819:PsiDirectoryNode" />
+              <item name="thesis_previous_checkpoint" type="b2602c69:ProjectViewProjectNode" />
+              <item name="thesis_previous_checkpoint" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="Thesis" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Thesis" type="462c0819:PsiDirectoryNode" />
+              <item name="thesis_previous_checkpoint" type="b2602c69:ProjectViewProjectNode" />
+              <item name="thesis_previous_checkpoint" type="462c0819:PsiDirectoryNode" />
               <item name="data" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="Thesis" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Thesis" type="462c0819:PsiDirectoryNode" />
+              <item name="thesis_previous_checkpoint" type="b2602c69:ProjectViewProjectNode" />
+              <item name="thesis_previous_checkpoint" type="462c0819:PsiDirectoryNode" />
               <item name="demos" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="Thesis" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Thesis" type="462c0819:PsiDirectoryNode" />
+              <item name="thesis_previous_checkpoint" type="b2602c69:ProjectViewProjectNode" />
+              <item name="thesis_previous_checkpoint" type="462c0819:PsiDirectoryNode" />
               <item name="plot" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="Scratches" />
       <pane id="Scope" />
+      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/plot/plot.py" />
+    <property name="last_opened_file_path" value="$USER_HOME$/PycharmProjects/Thesis" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -195,25 +201,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.plot_scan_with_bounding_boxes">
-    <configuration name="IndividualObject" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/data" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="Thesis" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/data/IndividualObject.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-    </configuration>
+  <component name="RunManager" selected="Python.temp_run">
     <configuration name="load_and_plot_one_scan" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -268,6 +256,24 @@
       <option name="EMULATE_TERMINAL" value="false" />
       <option name="MODULE_MODE" value="false" />
     </configuration>
+    <configuration name="temp" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="Thesis" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/temp.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+    </configuration>
     <configuration name="temp_run" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -289,17 +295,17 @@
     <list size="5">
       <item index="0" class="java.lang.String" itemvalue="Python.temp_run" />
       <item index="1" class="java.lang.String" itemvalue="Python.plot_scan_with_bounding_boxes" />
-      <item index="2" class="java.lang.String" itemvalue="Python.IndividualObject" />
-      <item index="3" class="java.lang.String" itemvalue="Python.preprocessing_manager" />
-      <item index="4" class="java.lang.String" itemvalue="Python.load_and_plot_one_scan" />
+      <item index="2" class="java.lang.String" itemvalue="Python.preprocessing_manager" />
+      <item index="3" class="java.lang.String" itemvalue="Python.load_and_plot_one_scan" />
+      <item index="4" class="java.lang.String" itemvalue="Python.temp" />
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="Python.plot_scan_with_bounding_boxes" />
-        <item index="1" class="java.lang.String" itemvalue="Python.temp_run" />
-        <item index="2" class="java.lang.String" itemvalue="Python.load_and_plot_one_scan" />
-        <item index="3" class="java.lang.String" itemvalue="Python.preprocessing_manager" />
-        <item index="4" class="java.lang.String" itemvalue="Python.IndividualObject" />
+        <item index="0" class="java.lang.String" itemvalue="Python.temp_run" />
+        <item index="1" class="java.lang.String" itemvalue="Python.plot_scan_with_bounding_boxes" />
+        <item index="2" class="java.lang.String" itemvalue="Python.temp" />
+        <item index="3" class="java.lang.String" itemvalue="Python.load_and_plot_one_scan" />
+        <item index="4" class="java.lang.String" itemvalue="Python.preprocessing_manager" />
       </list>
     </recent_temporary>
   </component>
@@ -359,7 +365,14 @@
       <option name="project" value="LOCAL" />
       <updated>1520959150049</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Branch with previous stable commit.">
+      <created>1523980992232</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1523980992232</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TodoView">
@@ -373,17 +386,18 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1096" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.13645943" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.15437302" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32916668" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32919955" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.31354168" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Python Console" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32916668" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32916668" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.31354168" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.396875" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.396875" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -426,17 +440,11 @@
     <MESSAGE value="Implemented correct way of rotating the bounding boxes in the 3d space" />
     <MESSAGE value="Reducing the area of interest of the scan to only the points that are &#10;in front of the car (meaning x&gt;0) and choice of how wide on the y axis &#10;the area should be." />
     <MESSAGE value="Implement idea of taking a sparse version of scan. Tried to implement &#10;idea of checking if there are any points inside tracklet before plotting &#10;it (in case of way to sparse scan), but it is buggy. Going to fix it &#10;immediately." />
-    <option name="LAST_COMMIT_MESSAGE" value="Implement idea of taking a sparse version of scan. Tried to implement &#10;idea of checking if there are any points inside tracklet before plotting &#10;it (in case of way to sparse scan), but it is buggy. Going to fix it &#10;immediately." />
+    <MESSAGE value="Branch with previous stable commit." />
+    <option name="LAST_COMMIT_MESSAGE" value="Branch with previous stable commit." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/temp_run.py</url>
-          <line>40</line>
-          <option name="timeStamp" value="122" />
-        </line-breakpoint>
-      </breakpoints>
       <breakpoints-dialog>
         <breakpoints-dialog />
       </breakpoints-dialog>
@@ -447,25 +455,11 @@
           </properties>
         </breakpoint>
       </default-breakpoints>
-      <option name="time" value="152" />
+      <option name="time" value="167" />
     </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/log/log">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="10" column="0" lean-forward="false" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/data/kitti_raw_manager.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1462">
-          <caret line="100" column="55" lean-forward="false" selection-start-line="100" selection-start-column="55" selection-end-line="100" selection-end-column="55" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/temp_run.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="170">
@@ -480,13 +474,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/log/log">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="10" column="0" lean-forward="false" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/log/log" />
     <entry file="file://$PROJECT_DIR$/data/kitti_raw_manager.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1309">
@@ -642,24 +630,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/log/log">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="1" column="0" lean-forward="false" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/log/log" />
     <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python35/Lib/site-packages/tensorflow/python/lib/io/file_io.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="184">
           <caret line="428" column="4" lean-forward="false" selection-start-line="428" selection-start-column="4" selection-end-line="428" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/config/config.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="10" column="0" lean-forward="true" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
         </state>
       </provider>
     </entry>
@@ -708,55 +683,75 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/data/IndividualObject.py">
+    <entry file="file://$PROJECT_DIR$/config/config.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="62" column="8" lean-forward="false" selection-start-line="62" selection-start-column="8" selection-end-line="62" selection-end-column="8" />
-          <folding />
+        <state relative-caret-position="170">
+          <caret line="10" column="0" lean-forward="true" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/temp_run.py">
+    <entry file="file://$PROJECT_DIR$/data/IndividualObject.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="391">
-          <caret line="30" column="60" lean-forward="true" selection-start-line="30" selection-start-column="60" selection-end-line="30" selection-end-column="60" />
+        <state relative-caret-position="781">
+          <caret line="180" column="0" lean-forward="true" selection-start-line="180" selection-start-column="0" selection-end-line="180" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/temp.py" />
+    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python35/Lib/random.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="211">
+          <caret line="732" column="0" lean-forward="false" selection-start-line="732" selection-start-column="0" selection-end-line="732" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/data/kitti_raw_manager.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="118">
-          <caret line="31" column="31" lean-forward="true" selection-start-line="31" selection-start-column="31" selection-end-line="31" selection-end-column="31" />
+        <state relative-caret-position="211">
+          <caret line="39" column="4" lean-forward="false" selection-start-line="39" selection-start-column="4" selection-end-line="39" selection-end-column="4" />
           <folding>
             <element signature="e#0#34#0" expanded="true" />
-            <element signature="e#1388#1420#0" expanded="false" />
-            <element signature="e#1458#3135#0" expanded="false" />
-            <element signature="e#3188#3919#0" expanded="false" />
-            <element signature="e#3973#4451#0" expanded="false" />
-            <element signature="e#4511#4559#0" expanded="false" />
-            <element signature="e#4603#4692#0" expanded="false" />
-            <element signature="e#4760#5553#0" expanded="false" />
-            <element signature="e#5648#6017#0" expanded="false" />
+            <element signature="e#1419#1451#0" expanded="false" />
+            <element signature="e#3219#3950#0" expanded="false" />
+            <element signature="e#4004#4482#0" expanded="false" />
+            <element signature="e#4542#4590#0" expanded="false" />
+            <element signature="e#4634#4723#0" expanded="false" />
+            <element signature="e#4791#5584#0" expanded="false" />
+            <element signature="e#5679#6048#0" expanded="false" />
+            <element signature="e#6105#6257#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/plot/plot.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="93" column="16" lean-forward="true" selection-start-line="93" selection-start-column="16" selection-end-line="93" selection-end-column="16" />
+          <folding>
+            <element signature="e#0#19#0" expanded="true" />
+            <element signature="e#5645#6440#0" expanded="false" />
+            <element signature="e#7200#8890#0" expanded="false" />
+            <element signature="e#9069#9729#0" expanded="false" />
+            <element signature="e#10022#10068#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/demos/plot_scan_with_bounding_boxes.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="5" column="14" lean-forward="false" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="14" />
+        <state relative-caret-position="187">
+          <caret line="11" column="0" lean-forward="true" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/plot/plot.py">
+    <entry file="file://$PROJECT_DIR$/temp_run.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="436">
-          <caret line="214" column="20" lean-forward="true" selection-start-line="214" selection-start-column="20" selection-end-line="214" selection-end-column="20" />
+        <state relative-caret-position="390">
+          <caret line="25" column="0" lean-forward="true" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
           <folding>
-            <element signature="e#0#11#0" expanded="true" />
-            <element signature="e#6185#7875#0" expanded="false" />
+            <element signature="e#0#17#0" expanded="true" />
           </folding>
         </state>
       </provider>
